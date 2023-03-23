@@ -1,0 +1,8 @@
+server/api/log.out
+server/api/ip.txt
+server/api/log.out
+
+*.out
+*.txt
+server/api/notion.json
+server/api/script.sh

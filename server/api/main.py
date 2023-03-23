@@ -86,7 +86,7 @@ def main():
                         },
                         '종류': {
                             'select': {
-                                'name': 'Local',
+                                'name': json_val['type'],
                                 'color': 'default'
                             }
                         },
