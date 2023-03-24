@@ -29,7 +29,7 @@ def check_last_ip(IP):
             if last_ip == IP:
                 return 0
             else:
-                f.truncate()
+                f.truncate(0)
                 f.write(IP)
                 return 1
     else:
@@ -112,7 +112,7 @@ def main():
             print(f'Current time: {datetime.today().strftime("%Y-%m-%d %H:%M:%S")}', file=sys.stderr, flush=True)
             if os.path.exists(IP_PATH):
                 with open(IP_PATH, 'w') as f:
-                    f.truncate()
+                    f.truncate(0)
         print(f'Current time: {datetime.today().strftime("%Y-%m-%d %H:%M:%S")}', flush=True)
         
 if __name__ == "__main__":
