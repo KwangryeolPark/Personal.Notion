@@ -39,8 +39,9 @@ def check_last_ip(IP):
         
 def main():
     print(f"PID: {os.getpid()}", flush=True)
-
+    print(reboot_time)
     HOST = socket.gethostname()
+    
     try:
         check_json()
         json_val = get_json()
@@ -53,12 +54,6 @@ def main():
 
         notion = Client(
             auth=NOTION_TOKEN
-        )
-
-        database = notion.databases.query(
-            **{
-                'database_id': NOTION_DATABASE_SERVER_API_ID
-            }
         )
         
         # More information: https://developers.notion.com/reference/property-value-object#date-property-values
@@ -78,44 +73,32 @@ def main():
                             }
                         ]
                     },
-                    '종류': {
-                        'select': {
-                            'name': json_val['type'],
-                            'color': 'default'
-                        }
-                    },
-                    'IP': {
+                    'Reboot time': {
                         'rich_text': [
                             {
                                 'type': 'text',
                                 'text': {
-                                    'content': IP
+                                    'content': reboot_time
                                 }
                             }
                         ]
                     },
                     '날짜': {
                         'date': {
-                            'start': datetime.today().strftime("%Y-%m-%d")
+                            'start': reboot_time
                         }
                     }
                 }
             }
         )
-    except :
-        print('Error')
-        print(f'Current time: {datetime.today().strftime("%Y-%m-%d %H:%M:%S")}', file=sys.stderr, flush=True)
+    except:
+        print(f'Current time: {reboot_time}', file=sys.stderr, flush=True)
         if os.path.exists(IP_PATH):
             with open(IP_PATH, 'w') as f:
                 f.truncate(0)
-    print(f'Current time: {datetime.today().strftime("%Y-%m-%d %H:%M:%S")}', flush=True)
         
 if __name__ == "__main__":
     parser.add_argument('-l', '--loop', type=bool, default=False)
     args = parser.parse_args()
-    
+    reboot_time = datetime.today().strftime("%Y-%m-%d %H:%M:%S")
     main()
-    if args.loop == True:
-        while True:
-            time.sleep(60 * 60) # One hour
-            main()

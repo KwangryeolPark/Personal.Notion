@@ -10,5 +10,5 @@ export NOTION_DATABASE_SERVER_API_ID=eec8cad7dc044af6a64035e8fe813ffe
 conda activate notion-api
 
 # Activate monitoring program
-python /root/workspace/projects/notion/server/api/main.py --loop True > log.out 2> err.out
+python /root/workspace/projects/notion/server/reboot_time/main.py --loop True > log.out 2> err.out
 
